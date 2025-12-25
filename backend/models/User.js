@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "USD",
   },
+  monthlyLimit: { 
+    type: Number, default: 0 
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -32,7 +35,6 @@ const userSchema = new mongoose.Schema({
 
 // hash password before saving
 userSchema.pre("save", async function () {
-  // <--- Removed 'next' parameter
   if (!this.isModified("password")) {
     return; // <--- Just return, don't call next()
   }

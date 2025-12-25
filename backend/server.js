@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const expenseRoutes = require("./routes/expenses");
+const walletRoutes = require("./routes/wallets");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/wallets", walletRoutes);
 
 // health check
 app.get("/api/health", (req, res) => {

@@ -34,6 +34,7 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         currency: user.currency,
+        monthlyLimit: user.monthlyLimit,
       },
     });
   } catch (error) {
@@ -74,6 +75,7 @@ router.post("/login", async (req, res) => {
         name: user.name,
         email: user.email,
         currency: user.currency,
+        monthlyLimit: user.monthlyLimit,
       },
     });
   } catch (error) {
@@ -93,10 +95,10 @@ router.get("/me", auth, async (req, res) => {
 // update profile
 router.put("/profile", auth, async (req, res) => {
   try {
-    const { name, currency } = req.body;
+    const { name, currency, monthlyLimit } = req.body;
     const user = await User.findByIdAndUpdate(
       req.userId,
-      { name, currency },
+      { name, currency, monthlyLimit },
       { new: true }
     ).select("-password");
 
