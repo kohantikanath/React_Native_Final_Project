@@ -6,13 +6,13 @@ PocketExpense+ is a full-stack mobile application designed to help users track t
 
 ### Authentication & Onboarding
 
-<img src="C:\Users\kohan\Documents\Kohantika\React_Native_Term10\Final_Project\pocket-expenses\app-1.png"/>
+![Screenshot 1](app-1.png)
 
 **Screens**: Splash Screen → Login → Signup
 
 ### Main Features
 
-<img src="C:\Users\kohan\Documents\Kohantika\React_Native_Term10\Final_Project\pocket-expenses\app-2.png"/>
+![Screenshot 2](app-2.png)
 
 **Screens**: Dashboard with Total Balance → Add Transaction → Weekly/Monthly Stats → Wallets Management → User Profile
 
