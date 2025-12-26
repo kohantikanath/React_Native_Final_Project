@@ -50,6 +50,30 @@ PocketExpense+ is a full-stack mobile application designed to help users track t
 
 Follow these steps to run the project locally.
 
+## 👩‍🏫 Instructor Guide
+
+- **Project Goal**: A full-stack expense tracker with JWT auth, wallets, stats, and offline safety.
+- **Run Order**: Start backend, then mobile app.
+- **Account Flow**: Sign up first (no seed user); log in with the created account.
+- **Demo Path**: Splash → Login/Signup → Dashboard → Add Transaction → Stats → Wallets → Profile (Budget Limit).
+
+### Repository Structure
+
+```
+backend/
+	server.js
+	config/db.js
+	middleware/auth.js
+	models/Expense.js, User.js, Wallet.js
+	routes/auth.js, expenses.js, wallets.js
+expense-app/
+	app/ (screens & routes)
+	services/api.ts (Axios client)
+	context/AuthContext.tsx
+	components/OfflineNotice.tsx
+	constants/ (categories, theme)
+```
+
 ### 1. Prerequisites
 
 - Node.js installed
@@ -140,3 +164,43 @@ To ensure data integrity, the app implements a "Detect & Protect" strategy:
 - **Visual Cues**: A red banner appears at the top of the screen when connection is lost
 - **Action Blocking**: Users are prevented from adding/editing data while offline to avoid sync conflicts and app crashes
 - **Data Persistence**: Dashboard data is cached locally, allowing users to view their balance even without internet
+
+---
+
+### Architecture Overview
+
+```
+[Expo App] --Axios--> [Express API] --Mongoose--> [MongoDB]
+		 |
+	 NetInfo (offline)
+		 |
+	UI guards & caching
+```
+
+## 🔑 Environment Variables (Backend)
+
+- **PORT**: Express server port (e.g., 3000)
+- **MONGO_URI**: Mongo connection string (local or Atlas)
+- **JWT_SECRET**: Secret for signing tokens
+
+Place them in `backend/.env`. Do not commit secrets.
+
+## Manual Testing Checklist
+
+- Sign up, log in, and receive a JWT.
+- Create a wallet; verify it appears with balance.
+- Add income and expense; confirm dashboard totals update.
+- Change monthly budget limit; try adding an expense that exceeds the limit and observe warning.
+- Open Stats to view weekly/monthly charts.
+- Toggle network off; verify offline banner and blocked actions; reopen network and continue.
+- Edit and delete a transaction; confirm totals and lists refresh.
+
+## ✅ Evaluation Checklist
+
+- Authentication: Register/Login with JWT and protected routes.
+- CRUD: Add, edit, delete expenses; list and detail view.
+- Wallets: Create folders; balances computed per wallet and globally.
+- Stats: Weekly/Monthly charts and insights endpoint.
+- Budget: Monthly limit with pre-submit warning.
+- Offline: Banner, mutation blocking, cached dashboard.
+- Code Quality: Clear structure, TypeScript on frontend, organized Express routes.
